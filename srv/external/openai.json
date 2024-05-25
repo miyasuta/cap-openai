@@ -1,0 +1,177 @@
+{
+	"openapi": "3.0.0",
+    "info": {
+		"title": "OpenAI Chat Completion API",
+		"description": "API for creating chat completions using OpenAI's language models.",
+		"version": "1.0.0"
+	},
+	"servers": [{
+		"url": "https://api.openai.com/v1"
+	}],
+	"paths": {
+		"/chat/completions": {
+			"post": {
+				"summary": "Create Chat Completion",
+				"description": "Creates a completion for the provided chat message.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"model": {
+										"type": "string",
+										"description": "The ID of the model to use.",
+										"example": "gpt-3.5-turbo"
+									},
+									"messages": {
+										"type": "array",
+										"description": "A list of messages comprising the conversation.",
+										"items": {
+											"type": "object",
+											"properties": {
+												"role": {
+													"type": "string",
+													"enum": ["system", "user", "assistant"],
+													"description": "The role of the author of this message."
+												},
+												"content": {
+													"type": "string",
+													"description": "The content of the message."
+												}
+											},
+											"required": ["role", "content"]
+										}
+									},
+									"max_tokens": {
+										"type": "integer",
+										"description": "The maximum number of tokens to generate in the completion."
+									},
+									"temperature": {
+										"type": "number",
+										"description": "Sampling temperature to use.",
+										"default": 1
+									},
+									"top_p": {
+										"type": "number",
+										"description": "Nucleus sampling probability.",
+										"default": 1
+									},
+									"n": {
+										"type": "integer",
+										"description": "How many completions to generate for each prompt.",
+										"default": 1
+									},
+									"stream": {
+										"type": "boolean",
+										"description": "Whether to stream back partial progress.",
+										"default": false
+									},
+									"stop": {
+										"type": ["string", "array"],
+										"items": {
+											"type": "string"
+										},
+										"description": "Up to 4 sequences where the API will stop generating further tokens."
+									},
+									"presence_penalty": {
+										"type": "number",
+										"description": "Penalty for presence of existing tokens.",
+										"default": 0
+									},
+									"frequency_penalty": {
+										"type": "number",
+										"description": "Penalty for frequency of existing tokens.",
+										"default": 0
+									},
+									"logit_bias": {
+										"type": "object",
+										"additionalProperties": {
+											"type": "integer"
+										},
+										"description": "Modifies the likelihood of specified tokens appearing in the completion."
+									},
+									"user": {
+										"type": "string",
+										"description": "A unique identifier representing the end-user."
+									}
+								},
+								"required": ["model", "messages"]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"description": "The ID of the completion."
+										},
+										"object": {
+											"type": "string",
+											"description": "The object type, usually 'chat.completion'."
+										},
+										"created": {
+											"type": "integer",
+											"description": "Creation time in epoch seconds."
+										},
+										"model": {
+											"type": "string",
+											"description": "The model used."
+										},
+										"choices": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"message": {
+														"type": "object",
+														"properties": {
+															"role": {
+																"type": "string"
+															},
+															"content": {
+																"type": "string"
+															}
+														}
+													},
+													"finish_reason": {
+														"type": "string"
+													},
+													"index": {
+														"type": "integer"
+													}
+												}
+											}
+										},
+										"usage": {
+											"type": "object",
+											"properties": {
+												"prompt_tokens": {
+													"type": "integer"
+												},
+												"completion_tokens": {
+													"type": "integer"
+												},
+												"total_tokens": {
+													"type": "integer"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+    "components": {}
+}

@@ -7,3 +7,11 @@ Content-Type: application/json
 {
     "input": "Hello, openAI"
 }
+
+###
+POST {{server}}/odata/v4/chat/chat_api
+Content-Type: application/json
+
+{
+    "input": "Hello, openAI"
+}

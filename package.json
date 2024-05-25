@@ -6,11 +6,14 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^3.15.0",
+    "@sap-cloud-sdk/http-client": "^3.15.0",
+    "@sap-cloud-sdk/resilience": "^3.15.0",
     "@sap/cds": "^7",
+    "@sap/xssec": "^3",
     "dotenv": "^16.4.5",
     "express": "^4",
     "openai": "^4.47.1",
-    "@sap/xssec": "^3",
     "passport": "^0"
   },
   "devDependencies": {
@@ -29,7 +32,22 @@
     "requires": {
       "[production]": {
         "auth": "xsuaa"
-      }
+      },
+      "OpenAI.Chat.Completion.API": {
+        "kind": "rest",
+        "model": "srv/external/openai",
+        "credentials": {
+          "url": "https://api.openai.com",
+          "path": "/v1"
+        },
+        "[production]": {
+            "credentials": {
+              "destination": "openai",
+              "path": "/v1"
+            }          
+        }
+      },
+      "destinations": true
     }
   }
 }

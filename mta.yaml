@@ -23,15 +23,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: cap-openai-auth
-      - name: cap-openai-db
-
-  - name: cap-openai-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: cap-openai-db
+      - name: cap-openai-destination
 
 resources:
   - name: cap-openai-auth
@@ -43,8 +35,18 @@ resources:
       config:
         xsappname: cap-openai-${org}-${space}
         tenant-mode: dedicated
-  - name: cap-openai-db
-    type: com.sap.xs.hdi-container
+  - name: cap-openai-destination
+    type: org.cloudfoundry.managed-service
     parameters:
-      service: hana
-      service-plan: hdi-shared
+      service: destination
+      service-plan: lite
+      config:
+        init_data:
+          instance:
+            destinations:      
+            - Authentication: NoAuthentication
+              Name: openai
+              ProxyType: Internet
+              Type: HTTP
+              URL: https://api.openai.com 
+            existing_destinations_policy: update
