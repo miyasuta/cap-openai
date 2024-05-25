@@ -1,0 +1,9 @@
+@server=http://localhost:4004
+
+###
+POST {{server}}/odata/v4/chat/chat_sdk
+Content-Type: application/json
+
+{
+    "input": "Hello, openAI"
+}
