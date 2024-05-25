@@ -41,10 +41,10 @@
           "path": "/v1"
         },
         "[production]": {
-            "credentials": {
-              "destination": "openai",
-              "path": "/v1"
-            }          
+          "credentials": {
+            "destination": "openai",
+            "path": "/v1"
+          }
         }
       },
       "destinations": true
