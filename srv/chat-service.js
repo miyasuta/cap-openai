@@ -8,7 +8,7 @@ module.exports = class ChatService extends cds.ApplicationService {
             console.log(apiKey);
             const request = req.data.input;
             const openai = new OpenAI({
-                apiKey: apiKey
+                apiKey: apiKey //省略可能
             });
 
             const response = await openai.chat.completions.create({
