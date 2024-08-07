@@ -9,7 +9,7 @@
     "@sap-cloud-sdk/connectivity": "^3.15.0",
     "@sap-cloud-sdk/http-client": "^3.15.0",
     "@sap-cloud-sdk/resilience": "^3.15.0",
-    "@sap/cds": "^7",
+    "@sap/cds": "^8",
     "@sap/xssec": "^3",
     "express": "^4",
     "openai": "^4.47.1",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^7",
+    "@sap/cds-dk": ">=7",
     "@sap/eslint-plugin-cds": "^3",
     "eslint": "^9"
   },
