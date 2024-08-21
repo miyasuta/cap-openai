@@ -16,7 +16,7 @@ module.exports = class ChatService extends cds.ApplicationService {
                     { role: "system", content: "You are a helpful assistant." },
                     { role: "user", content: request }
                 ],
-                model: "gpt-3.5-turbo",
+                model: "gpt-4o",
               });
 
             console.log(response);
@@ -30,7 +30,7 @@ module.exports = class ChatService extends cds.ApplicationService {
             const request = req.data.input;
             const openai = await cds.connect.to('OpenAI.Chat.Completion.API');
             const data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4o",
                 "messages": [
                     { role: "system", content: "You are a helpful assistant." },
                     { role: "user", content: request }
